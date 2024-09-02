@@ -3,12 +3,13 @@
 Keep track and calculate darts scores while playing on a traditional board.  
 ![](darts-app.png)
 
-Try it: https://darts-calculator.netlify.app/
+Try it: https://kaake.ca/darts
 
 Current game modes:
 - 301, 501, 701
 - shootout
 - cricket
+- tactics
 
 Features:
 - Up to 5 players
