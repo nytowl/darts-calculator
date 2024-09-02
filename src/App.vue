@@ -4,6 +4,7 @@
       <h2>Select game mode</h2>
       <div class="gamemode shootout" @click="game = 1">Shoot out</div>
       <div class="gamemode cricket" @click="game = 3">Cricket</div>
+      <div class="gamemode tactics" @click="game = 4">Tactics</div>
       <div class="gamemode zero1" @click="game = 2; zero1score = 301">301</div>
       <div class="gamemode zero12" @click="game = 2; zero1score = 501">501</div>
       <div class="gamemode zero13" @click="game = 2; zero1score = 701">701</div>
@@ -45,6 +46,7 @@
       <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset" :bullrule="bullrule"/>
       <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset" :bullrule="bullrule" />
       <cricket v-if="game == 3"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull']" />
+      <tactics v-if="game == 4"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull', 'double', 'triple']" />
     </div>
   </div>
 </template>
@@ -53,6 +55,7 @@
 import shootout from './shootout.vue'
 import zero1 from './zero1.vue'
 import cricket from './cricket.vue';
+import tactics from './tactics.vue';
 import './assets/global.css'
 
 export default {
@@ -61,6 +64,7 @@ export default {
     shootout,
     zero1,
     cricket,
+    tactics,
   },
   data: function() {
     return {
@@ -86,6 +90,9 @@ export default {
         this.gamestarted = true
       } else if (quickgame === "cricket") {
         this.game = 3
+        this.gamestarted = true
+      } else if (quickgame === "tactics") {
+        this.game = 4
         this.gamestarted = true
       } else if (quickgame === "shootout") {
         this.game = 1
@@ -139,8 +146,11 @@ export default {
 .shootout {
   background-color: #EAC435
 }
-.cricket {
+.tactics {
   background-color: #345995
+}
+.cricket {
+  background-color: #340095
 }
 .zero1 {
   background-color: #E40066

@@ -190,7 +190,7 @@
 <script>
 export default {
   name: 'dartboard',
-  props: ['disabled'],
+  props: ['disabled', 'game'],
   data: function() {
     return {
       hit: "",
@@ -200,13 +200,19 @@ export default {
   methods: {
     handleConfirmation(x) {
       let msg = x;
+      console.log(x)
       if (x == '1x') {
         msg = 'i' + this.hit
       } else if (x == '2x') {
         msg = 'd' + this.hit
       } else if (x == '3x') {
         msg = 't' + this.hit
+      } else if (x == 'double') {
+        msg = 'double' + this.hit
+      } else if (x == 'triple') {
+        msg = 'triple' + this.hit
       }
+      console.log("confirmation" + this.hit)
       this.$emit('hit', msg)
       this.hit = null;
     }
@@ -217,16 +223,28 @@ export default {
         return
       }
       const validTargets = [
-        'sbull','dbull',
+        'sbull','dbull','double','triple',
         'd20','d19','d18','d17','d16','d15','d14','d13','d12','d11','d10','d9','d8','d7','d6','d5','d4','d3','d2','d1',
         'i20','i19','i18','i17','i16','i15','i14','i13','i12','i11','i10','i9','i8','i7','i6','i5','i4','i3','i2','i1',
         'o20','o19','o18','o17','o16','o15','o14','o13','o12','o11','o10','o9','o8','o7','o6','o5','o4','o3','o2','o1',
-        't20','t19','t18','t17','t16','t15','t14','t13','t12','t11','t10','t9','t8','t7','t6','t5','t4','t3','t2','t1'
+        't20','t19','t18','t17','t16','t15','t14','t13','t12','t11','t10','t9','t8','t7','t6','t5','t4','t3','t2','t1',
       ];
       const id = e.target.id
+      console.log(id)
       if (validTargets.includes(id)) {
         const hit = id.substr(1)
-        const options = hit === 'bull' ? ['1x','2x'] : ['1x', '2x', '3x']
+        let options = [];
+        if ( hit === 'bull' ) {
+          if ( this.game == 4 )
+            options = ['1x','2x', 'double'];
+          else
+            options = ['1x','2x'];
+        } else {
+          if ( this.game == 4 )
+            options = ['1x', '2x', '3x', 'double', 'triple'];
+          else
+            options = ['1x', '2x', '3x']
+        }
         this.hit = hit
         this.options = options
       }
