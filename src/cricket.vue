@@ -160,13 +160,22 @@ export default {
         }
         
         if (leftover > 0) {
-          otherPlayers.forEach(other => {
-            if (other.score[target] < 3) {
-              other.score.points += leftover * score
+          let scoring = 0
+          this.players.forEach(p => {
+            if (p.score[target] == 3) {
+                scoring = scoring + 1
             }
           })
+          console.log("scoring " + scoring + " length " + this.players.length)
+          if (scoring > 0 && scoring < this.players.length) {
+            player.score.points += leftover * score
+            otherPlayers.forEach(other => {
+              if (other.score[target] === 3) {
+                other.score.points += leftover * score
+              }
+            })
+          }
         }
-
       }
 
       this.record.push(hit)
