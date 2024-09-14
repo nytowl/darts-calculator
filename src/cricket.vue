@@ -15,9 +15,9 @@
           <td class="targetD">{{ t }}</td>
           <td v-for="(player, index) in players" v-bind:key="player.name" :class="{ playerd: index + 1 < players.length }">
             <span v-if="player.score[t] === 0"></span>
-            <span v-else-if="player.score[t] === 1">⟋</span>
-            <span v-else-if="player.score[t] === 2">✕</span>
-            <span v-else-if="player.score[t] === 3">⦻</span>
+            <span v-else-if="player.score[t] === 1">X</span>
+            <span v-else-if="player.score[t] === 2">XX</span>
+            <span v-else-if="player.score[t] === 3"><s>XXX</s></span>
           </td>
         </tr>
         <tr class="scorerow">
