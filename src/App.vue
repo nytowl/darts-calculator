@@ -45,8 +45,8 @@
     <div v-else>
       <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset" :bullrule="bullrule"/>
       <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset" :bullrule="bullrule" />
-      <cricket v-if="game == 3"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull']" />
-      <tactics v-if="game == 4"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull', 'double', 'triple']" />
+      <cricket v-if="game == 3"  v-bind:playernames="players" v-on:gameover="reset" :targets="['20', '19', '18', '17', '16', '15', 'bull']" />
+      <tactics v-if="game == 4"  v-bind:playernames="players" v-on:gameover="reset" :targets="['20', '19', '18', '17', '16', '15', 'bull', 'double', 'triple']" />
     </div>
   </div>
 </template>
