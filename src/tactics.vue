@@ -77,6 +77,12 @@ export default {
       if ('sio'.includes(score[0])) {
         return 'single ' + score.substr(1)
       }
+      if (score.substring(0,6) === 'double') {
+        return score
+      }
+      if (score.substring(0,6) === 'triple') {
+        return score
+      }
       if (score[0] === 'd') {
         return 'double ' + score
       }
