@@ -200,7 +200,7 @@ export default {
   methods: {
     handleConfirmation(x) {
       let msg = x;
-      console.log(x)
+      console.log('handle confirmation x:' + x + ' hit:' + this.hit)
       if (x == '1x') {
         msg = 'i' + this.hit
       } else if (x == '2x') {
@@ -208,11 +208,11 @@ export default {
       } else if (x == '3x') {
         msg = 't' + this.hit
       } else if (x == 'double') {
-        msg = 'double' + this.hit
+        msg = 'double ' + this.hit
       } else if (x == 'triple') {
-        msg = 'triple' + this.hit
+        msg = 'triple ' + this.hit
       }
-      console.log("confirmation" + this.hit)
+      console.log("confirmation " + this.hit + ' ' + msg)
       this.$emit('hit', msg)
       this.hit = null;
     }
@@ -241,7 +241,10 @@ export default {
             options = ['1x','2x'];
         } else {
           if ( this.game == 4 )
-            options = ['1x', '2x', '3x', 'double', 'triple'];
+            if ( hit >= 15 )
+                options = ['1x', '2x', '3x', 'double', 'triple'];
+            else
+                options = ['double', 'triple'];
           else
             options = ['1x', '2x', '3x']
         }
