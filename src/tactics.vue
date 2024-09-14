@@ -209,22 +209,21 @@ export default {
 
       this.record.push(hit)
 
-      const leastpoints = otherPlayers.reduce((least, next) => Math.min(next.score.points, least), Number.MAX_SAFE_INTEGER)
-      const finished = this.targets.every(target => player.score[target] === 3) && player.score.points < leastpoints
+      const mostpoints = this.players.reduce((most, next) => Math.max(next.score.points, most), Number.MIN_SAFE_INTEGER)
+      const finished = this.targets.every(target => player.score[target] === 3) && player.score.points >= mostpoints
+
+      console.log("most points " + mostpoints)
+      console.log("finished " + finished )
 
       if (finished) {
         player.finished = true
+        this.gameover = true
+        this.playerchange = false
+        return
       }
 
-      if (player.throws.length % 3 == 0 || finished) {
-        
-        if (this.turn + 1 === this.players.length && this.currentround === this.roundLimit) {
-          this.gameover = true
-          this.playerchange = false
-          return
-        } else {
-          this.playerchange = true
-        }
+      if (player.throws.length % 3 == 0) {
+        this.playerchange = true
       }
 
       this.highlight()
