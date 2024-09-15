@@ -237,12 +237,15 @@ export default {
       }
       const multiplierString = target[0]
       const special = target.substr(0,6)
-      const number = target.substr(1)
-      if (special == "double") {
-        const number = target.substr(6)
+      let number = target.substr(1)
+      if (special === "double" ) {
+        number = target.substr(7)
+        if ( number === "bull" ) {
+          number = 25;
+        }
         return { score: parseInt(number) * 2, target: "double", multiplier: 1 }
-      } else if (special == "triple") {
-        const number = target.substr(6)
+      } else if (special === "triple") {
+        number = target.substr(7)
         return { score: parseInt(number) * 3, target: "triple", multiplier: 1 }
       } else if (number == "bull") {
         return { score: 25, target: 'bull', multiplier: multiplierString === 'd' ? 2 : 1 }
