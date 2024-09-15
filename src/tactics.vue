@@ -112,6 +112,8 @@ export default {
         },
         throws: [],
       }))
+      // try and save the state in case we get disconnected
+      localStorage.setItem("tactics", this.players)
       
       setTimeout(() => {
         this.highlight()
@@ -174,6 +176,7 @@ export default {
       const player = this.players[this.turn]
 
       player.throws.push(hit)
+      localStorage.setItem("tactics", this.players)
 
       const otherPlayers = this.players.filter(p => p !== player && p.finished === false);
       
