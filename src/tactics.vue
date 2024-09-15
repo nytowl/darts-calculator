@@ -38,6 +38,7 @@
     <div v-if="gameover" class="gameover">
       <div class="mainmenu" @click="goToMenu">Main menu</div>
       <div class="playagain" @click="init">Play again</div>
+      <div class="getstats" @click="getStats">Get game stats</div>
     </div>
     <Dartboard v-on:hit="handleDartHit" :disabled="playerchange || gameover"  game=4 />
   </div>
@@ -172,7 +173,7 @@ export default {
       const { score, target, multiplier } = this.calculateValue(hit)
       const player = this.players[this.turn]
 
-      player.throws.push(target)
+      player.throws.push(hit)
 
       const otherPlayers = this.players.filter(p => p !== player && p.finished === false);
       
@@ -265,6 +266,22 @@ export default {
     },
     goToMenu() {
       this.$emit('gameover')
+    },
+    getStats() {
+      let text = JSON.stringify(this.players);
+      const d = new Date();
+      let date = d.toISOString().substr(0,16);
+      let filename = 'tactics_stats_' + date + '.json';
+      let element = document.createElement('a');
+      element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+      document.body.removeChild(element);
+      this.goToMenu();
     }
   }
 }
